@@ -14,12 +14,12 @@ import { CategoryTag } from "./components/CategoryTag";
 
 function App() {
   const pageSize: number = 10;
-  const [emojis, setEmojis] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [emojis, setEmojis] = useState<Emoji[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [pageCount, setPageCount] = useState<number>(0);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchEmojis = async () => {
     setLoading(true);
@@ -27,11 +27,11 @@ function App() {
       "https://emojihub.yurace.pro/api/all"
     );
     if (categories.length === 0) {
-      const newCategorySet = new Set();
+      const newCategorySet = new Set<string>();
       emojiData.map((emoji: Emoji) => newCategorySet.add(emoji.category));
-      const finalCategories: unknown[] = Array.from(newCategorySet);
+      const finalCategories: string[] = [...newCategorySet];
       setCategories(finalCategories);
-      setPageCount(parseInt(emojiData.length / 10));
+      setPageCount(Math.floor(emojiData.length / 10));
     }
     if (selectedCategory) {
       emojiData = emojiData.filter(
