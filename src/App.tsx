@@ -43,7 +43,7 @@ function App() {
   };
 
   const handlePageChange = (
-    event: ChangeEvent<unknown> | null,
+    _event: ChangeEvent<unknown> | null,
     newPage: number
   ) => {
     setPage(newPage);
